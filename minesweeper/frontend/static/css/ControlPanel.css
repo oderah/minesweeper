@@ -1,0 +1,17 @@
+#ctrl {
+    margin-top: 10vh;
+    width: 70vw;
+    height: 5vh;
+    background-color: green;
+}
+
+#ctrl ul {
+    padding: 1vh 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#ctrl li {
+    display: inline;
+    text-align: center;
+}

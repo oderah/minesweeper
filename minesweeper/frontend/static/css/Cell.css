@@ -1,0 +1,28 @@
+.cell {
+    /* width: 3.3%;
+    height: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+
+/* #flag {
+    position: relative;
+    /* top: 20%;
+    left: 20%;
+} */
+
+p {
+    margin: 0;
+    width: inherit;
+    /* padding-top: 5%; */
+    text-align: center;
+    /* display: flex;
+    justify-content: center; */
+}
+
+/* .open {
+    background-color: grey;
+} */

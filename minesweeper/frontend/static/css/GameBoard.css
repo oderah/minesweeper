@@ -1,0 +1,48 @@
+/* .container {
+    width: 40vw;
+    position: relative;
+}
+
+.container:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.grid {
+    position: absolute;
+    width: 125%;
+    height: 125%;
+    display: grid;
+    grid-template-columns: repeat(30, 3.3%);
+    grid-template-rows: repeat(30, 3.3%);
+    grid-gap: 2px;
+    background-color: blue;
+} */
+
+#game {
+    display: flex;
+    justify-content: center;
+
+    width: 70vw;
+    height: 70vh;
+    background-color: orange;
+}
+
+#gameBoard {
+    box-shadow:  2px 2px 15px 5px;
+}
+
+.grid {
+    /* width: 70vw;
+    height: 70vh; */
+    padding: 1vh 0;
+    width: inherit;
+    height: inherit;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    grid-gap: 2px;
+    background-color: grey;
+    overflow: hidden;
+}
