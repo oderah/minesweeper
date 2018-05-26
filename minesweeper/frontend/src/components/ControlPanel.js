@@ -24,7 +24,7 @@ class ControlPanel extends Component {
             <div id="ctrl" className="container">
                 <ul>
                     <li><Display component="FlagsLeft" gs_id={this.props.gs_id} ref={(flags) => {this.flagsLeft = flags}} /></li>
-                    <li></li>
+                    <li style={{height: '60%'}}><button className="btn btn-default" style={{height: '100%'}} onClick={() => {this.props.history.push("/")}}></button></li>
                     <li><Display component="Timer" gs_id={this.props.gs_id} ref={(t) => {this.timer = t}} /></li>
                 </ul>
             </div>

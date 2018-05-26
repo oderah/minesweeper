@@ -2,3 +2,6 @@ db.sqlite3
 *.pyc
 *.json
 ../node_modules/.cache
+db.sqlite3
+../package-lock.json
+../package.json

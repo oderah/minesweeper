@@ -101,7 +101,7 @@ class Display extends Component {
         var elapsedTime = ((arr[0]*3600) + (arr[1]*60) + arr[2]);
 
         axios.post("http://127.0.0.1:8000/api/"+gs_id+"/", {"msg":"timeUpdate", "elapsedTime":elapsedTime}).then(function(res){
-            console.log(res.data);
+            // console.log(res.data);
         }).catch(function(err){
             console.log(err);
         });

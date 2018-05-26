@@ -74,6 +74,7 @@ class GameBoard extends Component {
     // this function loads a game represented by gs_id if it exists
     loadGame() {
         // get gs_id from url
+        console.log("loadGame");
         var gs_id = this.props.location.pathname;
         gs_id = gs_id.substring(6,9);
 
@@ -119,7 +120,7 @@ class GameBoard extends Component {
     }
 
     componentWillMount() {
-        if(this.props.location.pathname == "/") {
+        if(this.props.location.pathname == "/newGame") {
             this.launchGame();
         }
 

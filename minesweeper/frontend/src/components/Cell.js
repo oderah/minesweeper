@@ -11,7 +11,7 @@ class Cell extends Component {
         this.state = {
             x: props.x,
             y: props.y,
-            style: "red",
+            style: "#8E9FB2",
             text: "",
             flagged: false
         };
