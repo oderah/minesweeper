@@ -17,6 +17,8 @@ var _ = require("lodash");
 
 var gameOn = false; // game control, true if game is running
 
+var bigOpen = false; // determines if a big patch has been opened
+
 var self; // ref to this
 
 class GameBoard extends Component {
@@ -33,6 +35,22 @@ class GameBoard extends Component {
 
     }
 
+    bigOpened = () => (bigOpen);
+
+    toggleBigOpen = (toggle) => {
+        let gs_id = this.state.gs_id;
+        let data = {"msg":"bigOpen", "toggle":toggle};
+        console.log("DATA ===> ", data);
+
+        axios.post("http://127.0.0.1:8000/api/"+gs_id+"/", data)
+        .then(function(res){
+            bigOpen = toggle;
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
     // this function returns a mapped array of cells
     getCells() {
         let cells = [];
@@ -45,7 +63,7 @@ class GameBoard extends Component {
 
         // create mapped
         let mapped = cells.map(function(tup, key){
-            return <Cell key={key} x={tup[0]} y={tup[1]} gs_id={self.state.gs_id} gameOn={self.gameOn} winGame={self.winGame} endGame={self.endGame} updateFlags={self.updateFlags} ref={(cell) => {self.cellRefs[(tup[0]+","+tup[1])] = cell}} />
+            return <Cell key={key} boardWidth={self.props.numCells} x={tup[0]} y={tup[1]} gs_id={self.state.gs_id} gameOn={self.gameOn} winGame={self.winGame} bigOpened={self.bigOpened} toggleBigOpen={self.toggleBigOpen} endGame={self.endGame} updateFlags={self.updateFlags} openCell={self.openCell} ref={(cell) => {self.cellRefs[(tup[0]+","+tup[1])] = cell}} />
         });
 
         return mapped;
@@ -64,6 +82,7 @@ class GameBoard extends Component {
 
                 // redirect to game with id == gs_id
                 self.props.history.push("/game/" + res.data["gs_id"]);
+                self.toggleBigOpen(false);
             }
         })
         .catch(function(err) {
@@ -112,6 +131,7 @@ class GameBoard extends Component {
             }
             else {
                 gameOn = true;
+                self.toggleBigOpen(res.data["bigOpen"]);
             }
         }).catch(function(err) {
             console.log(err);
@@ -132,6 +152,10 @@ class GameBoard extends Component {
     gameOn() {
         return gameOn;
     }
+
+    openCell = (i, j) => {
+        self.cellRefs[(i+","+j)].clicked();
+    };
 
     // this function updates the flagsLeft display component
     updateFlags(flagsLeft) {

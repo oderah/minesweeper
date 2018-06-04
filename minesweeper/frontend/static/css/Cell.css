@@ -5,8 +5,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* margin: 2px; */
+    /* transform: scale(1);
+    transition-duration: 0.3s;
+    z-index: 0; */
+    /* box-shadow: 0px 0px 5px 0px; */
     /* background-color: red; */
 }
+
+/* .cell:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+    z-index: 20;
+    background-color: #fff;
+} */
 
 /* #flag {
     position: relative;

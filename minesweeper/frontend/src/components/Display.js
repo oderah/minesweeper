@@ -4,21 +4,21 @@ import "../../static/css/Display.css"
 
 var axios = require("axios");
 
-var timerOn = false;
-
 class Display extends Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
             component: props.component,
             text: "",
-            gs_id: props.gs_id
+            gs_id: props.gs_id,
+            timerOn: false
         };
     }
 
     // get flagsLeft and elapsedTime from api
-    componentWillMount() {
+    componentDidMount() {
         var gs_id = this.state.gs_id;
 
         var self = this;
@@ -30,7 +30,9 @@ class Display extends Component {
                 });
             }
             else {
+                console.log(self.state.timerOn);
                 self.startTimer(res.data["text"]);
+                console.log(self.state.timerOn);
             }
         })
         .catch(function(err) {
@@ -40,7 +42,9 @@ class Display extends Component {
 
     // toggle for timerOn
     toggleTimer() {
-        timerOn = !timerOn;
+        this.setState({
+            timerOn: !this.state.timerOn
+        });
     }
 
     // this function starts the timer
@@ -76,7 +80,7 @@ class Display extends Component {
 
     // this function keeps the timer running while the timer and game are on
     runTimer(arr) {
-        if(timerOn) {
+        if(this.state.timerOn) {
             let self = this;
 
             // update timer every second

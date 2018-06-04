@@ -13,6 +13,7 @@ class GameSession(models.Model):
     elapsedTime = models.IntegerField()
     countOpen = models.IntegerField(default=0)
     isOver = models.BooleanField(default=False)
+    bigOpen = models.BooleanField(default=False)
 
     def __str__(self):
         return 'Session (flagsLeft=' + str(self.flagsLeft) + ', elapsedTime=' + str(self.elapsedTime) + ')'
@@ -30,4 +31,4 @@ class Cell(models.Model):
             raise ValidationError('Cell cannot be flagged while open')
 
     def __str__(self):
-        return 'Cell (' + str(self.x) + ',' + str(self.y) + ')'
+        return 'Cell (' + str(self.x) + ',' + str(self.y) + ',' + str(self.isBomb) + ')'

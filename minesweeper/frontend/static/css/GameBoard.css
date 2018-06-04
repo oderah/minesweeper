@@ -24,12 +24,15 @@
     display: flex;
     justify-content: center;
 
-    width: 70vw;
+    /* width: 50vw;
+    height: 70vh; */
     height: 70vh;
-    background-color: orange;
+    background-color: #65573D;
 }
 
 #gameBoard {
+    width: 50vw;
+    height: 70vh;
     box-shadow:  2px 2px 15px 5px;
 }
 
@@ -42,7 +45,7 @@
     display: grid;
     grid-template-columns: repeat(15, 1fr);
     grid-template-rows: repeat(15, 1fr);
-    grid-gap: 2px;
-    background-color: grey;
+    grid-gap: 5px;
+    /* background-color: silver; */
     overflow: hidden;
 }

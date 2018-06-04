@@ -1,17 +1,47 @@
 #ctrl {
     margin-top: 10vh;
-    width: 70vw;
+    /* width: 70vw; */
     height: 5vh;
-    background-color: green;
+    background-color: #B2A58E;
 }
 
 #ctrl ul {
-    padding: 1vh 0 0 0;
+    list-style: none;
+    /* padding: 1vh 0 0 0; */
+    margin: 0;
+    height: 60%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
 #ctrl li {
-    display: inline;
+    padding: 1vh 0 0 0;
+    /* display: flex;
+    justify-content: center; */
     text-align: center;
 }
+
+#ctrl li:nth-child(2) {
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#ctrl li:nth-child(2) div {
+    padding-top: 0.5vh;
+}
+/* 
+#ctrl li:nth-child(2) div:hover {
+    background-color:  #65573D;
+} */
+
+#ctrl li:nth-child(2) div img:hover {
+    transform: scale(1.1);
+    transition-duration: 0.3s;
+}
+
+/* #ctrl button {
+    background: url("../SVG/reset.svg");
+} */

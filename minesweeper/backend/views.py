@@ -25,11 +25,13 @@ class SetupView(generics.ListCreateAPIView):
     def get_bombs(self, difficulty, numCells):
         global all_bombs
 
+        allBombs = []
+
         # determine number of bombs based on difficulty
         numBombs = 20 if difficulty == "Beginner" else 90 if difficulty == "Intermediate" else 250
 
         # generate bomb coordinates
-        # bombs = []
+        bombs = []
         for i in range(0, numBombs):
 
             bomb = (random.randrange(0, numCells), random.randrange(0, numCells))
@@ -37,15 +39,14 @@ class SetupView(generics.ListCreateAPIView):
             while bomb in all_bombs:
                 bomb = (random.randrange(0, numCells), random.randrange(0, numCells))
 
-            all_bombs.append(bomb)
+            bombs.append(bomb)
 
-        # all_bombs = bombs
+        all_bombs = bombs
 
-        # return bombs
 
     # this function creates a new game session and returns its id
     def create_newGame(self, difficulty):
-
+        print("CREATING NEW GAME ...")
         # determine number of flags based on difficulty
         flags = 15 if difficulty == "Beginner" else 60 if difficulty == "Intermediate" else 100
 
@@ -76,7 +77,7 @@ class SetupView(generics.ListCreateAPIView):
         # if request is create new game
         if request.data["msg"] == "new":
             gs_id = self.create_newGame(request.data["diff"])
-            response = {"gs_id":gs_id}
+            response = {"gs_id":gs_id, "bigOpen":False}
             return JsonResponse(response, safe=False)
 
 
@@ -167,6 +168,7 @@ class GameView(generics.ListCreateAPIView):
     # post method
     def post(self, request, fromat=None, **kwargs):
         global all_bombs
+
         gs = GameSession.objects.get(id=self.kwargs.get("gs_id"))
 
         if gs:
@@ -185,7 +187,7 @@ class GameView(generics.ListCreateAPIView):
             # request to update elapsedTime
             elif request.data["msg"] == "timeUpdate":
                 e_time = request.data["elapsedTime"]
-                print("e_time", type(e_time))
+
                 gs.elapsedTime = e_time
                 gs.save()
                 return JsonResponse({"msg":"done"})
@@ -198,7 +200,7 @@ class GameView(generics.ListCreateAPIView):
 
             # request to check if game is over
             elif request.data["msg"] == "isOver?":
-                return JsonResponse({"msg":gs.isOver})
+                return JsonResponse({"msg":gs.isOver, "bigOpen":gs.bigOpen})
 
             # request to check if a cell is open
             elif request.data["msg"] == "isOpen?":
@@ -212,6 +214,14 @@ class GameView(generics.ListCreateAPIView):
 
                 # return response, content of cell and if cell is flagged
                 return JsonResponse({"msg":cell.isOpen, "msg2":msg, "isFlagged":cell.isFlagged})
+
+            # request to update bigOpen
+            elif request.data["msg"] == "bigOpen":
+                print("===========>", request.data)
+                gs.bigOpen = request.data["toggle"]
+                gs.save()
+
+                return JsonResponse({"msg":"done"})
 
             # request to flag or unflag cell
             else:
